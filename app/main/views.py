@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, g
 from . import main
 from ..decorator import jsonp, auth
 
@@ -7,11 +7,11 @@ def before_request():
     print('run this before every request to main module...')
 
 
-@main.route('/v1/main/get/<cust_id>', methods = ['GET'])
+@main.route('/v1/main/get', methods = ['GET'])
 @jsonp
 @auth.login_required
-def test_get(cust_id):
-    print('cust_id: %s, type: %s' % (cust_id, type(cust_id)))
+def test_get():
+    print('cust_id:', g.user)
     key1 = request.args.get('key1')
     print('key1:', key1, 'type:', type(key1))
 
