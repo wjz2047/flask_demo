@@ -24,7 +24,7 @@ def test_get():
 @main.route('/v1/main/post', methods = ['POST'])
 @auth.login_required
 def test_post():
-    post_data = request.get_json(force=True)
+    post_data = request.get_json()
     if post_data is None:
         post_data = request.form
     if post_data is None:
