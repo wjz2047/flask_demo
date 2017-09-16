@@ -2,7 +2,7 @@ from flask import request, jsonify
 from . import main
 from ..decorator import jsonp
 
-@main.before_request()
+@main.before_request
 def before_request():
     print('run this before every request to main module...')
 
