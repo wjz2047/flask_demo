@@ -24,9 +24,8 @@ def test_get():
 @main.route('/v1/main/post', methods = ['POST'])
 @auth.login_required
 def test_post():
-    if request.headers['Content-Type'] == 'application/json':
-        post_data = request.get_json()
-    else:
+    post_data = request.get_json(force=True)
+    if post_data is None:
         post_data = request.form
     if post_data is None:
         result = {
@@ -34,7 +33,7 @@ def test_post():
             'data': 'No Data'
         }
         return jsonify(result)
-    
+
     print('key1:', post_data['key1'], 'type:', type(post_data['key1']))
 
     result = {
